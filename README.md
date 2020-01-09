@@ -1,2 +1,2 @@
-# imageboard
-Anonymous imageboard
+# Django Imageboard
+My first Django project.
