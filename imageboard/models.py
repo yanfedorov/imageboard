@@ -1,6 +1,7 @@
 from django.core.validators import FileExtensionValidator
 from django.core.files.images import get_image_dimensions
 from django.db import models
+import io
 import os
 
 
@@ -38,6 +39,10 @@ class Post(God):
     thread = models.ForeignKey(Thread, on_delete=models.PROTECT, verbose_name='Тред', related_name='Post.thread+')
     sage = models.BooleanField(verbose_name='SAGE', default=False)
     op_mark = models.BooleanField(verbose_name='ОП треда', default=False)
+
+    def reply(self):
+        pass
+    # TODO: MAKE REPLIES
 
     class Meta:
         verbose_name = 'Пост'

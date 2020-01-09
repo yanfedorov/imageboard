@@ -14,6 +14,8 @@
     {% for board in boards %}
         <a class='links' href="{% url 'board' board.letter %}">{{ board.name }}</a>
     {% endfor %}
+    </br>
+    <a style="color: white" class="links" href="#bottom">Вниз</a>
 
 <header><a class="header" href="{% url 'board' current_board.letter %}">{{ current_board.name }}</a>.</header>
 <div class="post">
@@ -64,16 +66,24 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-                        <span class="content">{{ post.content }}</span>
+            <span class="content">
+                            {% if post.reply %}
+                                {% for r in reply %}
+                                    {{ r }}
+                                {% endfor %}
+                            {% endif %}
+            {{ post.content }}</span>
         </div>
     {% endfor %}
 
-<form class="newthread" method="post" enctype="multipart/form-data" novalidate>
+<form class="newthread" method="post" enctype="multipart/form-data" novalidate style="margin-left: 150px">
     {% csrf_token %}
     {{ form.as_p }}
     {{ form_file.as_p }}
     <button class="post" type="submit">Запостить</button>
+    <a class="links" href="#top">Вверх</a>
 </form>
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{% static 'imageboard/scripts/lightbox.js' %}"></script>
+    <a name="bottom"></a>
 {% endblock content %}
