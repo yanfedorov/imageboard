@@ -16,7 +16,7 @@ class God(models.Model):
 
 class Board(models.Model):
     name = models.TextField()
-    letter = models.TextField(max_length=2, unique=True)
+    letter = models.TextField(max_length=3, unique=True)
 
     class Meta:
         verbose_name = 'Доска'
