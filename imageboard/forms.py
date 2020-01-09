@@ -1,11 +1,12 @@
 from django.forms import ModelForm, Textarea, CharField, FileField, ClearableFileInput
 from django.forms.widgets import HiddenInput
 from .models import Thread, Post, FilePost, FileThread
+from captcha.fields import CaptchaField
 
 
 # from captcha.fields import CaptchaField
 class ThreadForm(ModelForm):
-    # captcha = CaptchaField()
+    #captcha = CaptchaField()
     title = CharField(label=False, widget=Textarea(attrs={'class': 'newthread',
                                                           'placeholder': 'Название треда', 'rows': 1}))
     name = CharField(label=False, widget=Textarea(attrs={'class': 'newthread', 'placeholder': 'Имя',

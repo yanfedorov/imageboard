@@ -6,7 +6,7 @@ SECRET_KEY = 'y_jm*q)%1k%yrb9)la=o#et3shdqvwc_1=+q*kn6ev0l-^zkl1'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 
 INSTALLED_APPS = [

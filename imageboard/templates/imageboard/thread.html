@@ -41,7 +41,9 @@
     {% for post in posts %}
 
         <div class="post">
-                <p class="namedate">{{ post.name }} {{ post.date|date:'d/m/y H:i:s' }} №{{ post.pk }}
+                <p class="namedate">{{ post.name }} {{ post.date|date:'d/m/y H:i:s' }}
+                    <span style="color: #ccc"><a style="color: white; text-decoration-line: none" href="#{{ post.pk }}"> №</a><a name="{{ post.pk }}"></a>{{ post.pk }}
+                    </span>
                     {% if post.sage %}<span class="sage">SAGE</span>{% endif %}</p>
                 {% for file in files %}
                     {% if post.id == file.post.id %}
