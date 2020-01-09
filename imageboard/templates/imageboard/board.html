@@ -1,0 +1,62 @@
+{% extends 'imageboard/layout/basic.html' %}
+{% load thumbnail %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'imageboard/lightbox.css'%}"/>
+{% endblock head %}
+
+{% block title %}{{ current_board.name }}{% endblock title %}
+
+{% block content %}
+
+<a class="links" href="{% url 'mainpage' %}">Главная</a>
+{% for board in boards %}
+    <a class='links' href="{% url 'board' board.letter %}">{{ board.name }}</a>
+{% endfor %}
+<header>{{ current_board }}.</header>
+
+
+{% if threads %}
+    {% for thread in threads %}
+        <div class="thread">
+        <span class="post_title">
+            <p class="thread_title">{{ thread.title }}</p>
+            <p class="namedate">{{ thread.name }} {{ thread.date|date:'d/m/y H:i:s' }} <span style="color: #ccc">№{{ thread.pk }}</span>
+            <a class="image" href="{% url 'thread' current_board.letter thread.pk %}">Ответ</a></p>
+        </span>
+        {% for file in files %}
+            {% if thread.id == file.thread.id %}
+                <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" target="_blank">{{ file.file }}</a>
+                <p class="img_size">({{ file.file.size|filesizeformat }}{% if file.extension == '.jpeg' or file.extension == '.png' or file.extension == '.jpg'%},{{ file.resolution }})</p>
+                <form enctype="multipart/form-data">
+                    <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" data-lightbox="none" target="_blank">
+                        {% thumbnail file.file '200' crop='center' as img %}
+                            <img src="{{MEDIA_URL }}{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
+                        {% endthumbnail %}
+                    </a>
+                </form>
+                {% else %})</p>
+                    <video controls width="170" height="95">
+                        <source src="{{ MEDIA_URL }}{{ file.file.url }}">
+                    </video>
+                    {% endif %}
+            {% endif %}
+        {% endfor %}
+            <span class="content">{{ thread.content }}</span>
+        </div>
+    {% endfor %}
+{% else %}
+        <header style="font-size: 40px">Тредов нет.</header>
+{% endif %}
+
+<form class="newthread" method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ form_file.as_p }}
+    <button class="post" type="submit">Запостить</button>
+</form>
+
+    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{% static 'imageboard/scripts/lightbox.js' %}"></script>
+{% endblock content %}

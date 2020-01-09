@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html">
+    <link rel="shortcut icon" type="image/ico" href="{% static 'imageboard/favicon.png' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'imageboard/style.css' %}">
+    <title>{% block title %}vBoard{% endblock title %}</title>
+    {% block head %}{% endblock head %}
+</head>
+<body>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>
