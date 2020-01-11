@@ -38,7 +38,7 @@
                         </video>
                     {% endif %}
                     {% endfor %}
-                        <span class="content">{{ current_thread.content }}</span>
+                        <span class="content">{{ current_thread.content.rendered }}</span>
     </div>
     {% for post in posts %}
 
@@ -72,7 +72,7 @@
                                     {{ r }}
                                 {% endfor %}
                             {% endif %}
-            {{ post.content }}</span>
+            {{ post.content.rendered }}</span>
         </div>
     {% endfor %}
 

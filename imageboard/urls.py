@@ -8,5 +8,6 @@ urlpatterns = [
     path('<str:board_l>/<int:thread_n>/', thread, name='thread'),
     path('', mainpage, name='mainpage'),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += [re_path(r'^captcha/', include('captcha.urls')), ]

@@ -43,7 +43,7 @@
                     {% endif %}
             {% endif %}
         {% endfor %}
-            <span class="content">{{ thread.content }}</span>
+            <span class="content">{{ thread.content.rendered }}</span>
         </div>
     {% endfor %}
 {% else %}

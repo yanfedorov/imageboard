@@ -1,5 +1,6 @@
 from django.core.validators import FileExtensionValidator
 from django.core.files.images import get_image_dimensions
+from precise_bbcode.fields import BBCodeTextField
 from django.db import models
 import io
 import os
@@ -7,7 +8,7 @@ import os
 
 class God(models.Model):
     name = models.CharField(blank=True, max_length=50, default='Аноним', verbose_name='Имя')
-    content = models.TextField(max_length=15000, verbose_name='Содержимое')
+    content = BBCodeTextField(max_length=15000, verbose_name='Содержимое')
     date = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Дата', null=True)
 
     class Meta:
@@ -36,12 +37,13 @@ class Thread(God):
 
 
 class Post(God):
-    thread = models.ForeignKey(Thread, on_delete=models.PROTECT, verbose_name='Тред', related_name='Post.thread+')
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, verbose_name='Тред', related_name='Post.thread+')
     sage = models.BooleanField(verbose_name='SAGE', default=False)
     op_mark = models.BooleanField(verbose_name='ОП треда', default=False)
 
     def reply(self):
         pass
+
     # TODO: MAKE REPLIES
 
     class Meta:

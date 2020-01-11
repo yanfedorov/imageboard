@@ -13,7 +13,7 @@ def board(request, board_l):
     boardlist = Board.objects.all()
     threads = Thread.objects.filter(board__letter=board_l)
     current_board = Board.objects.get(letter=board_l)
-    filess = FileThread.objects.all()
+    files = FileThread.objects.all()
     if request.POST:
         form = ThreadForm(request.POST)
         form_file = ThreadFileForm()
@@ -28,7 +28,7 @@ def board(request, board_l):
         form_file = ThreadFileForm
         form = ThreadForm(initial={'board': current_board})
     context = {'threads': threads, 'current_board': current_board, 'form': form, 'boards': boardlist,
-               'files': filess,
+               'files': files,
                'form_file': form_file}
     return render(request, 'imageboard/board.html', context=context)
 
@@ -39,15 +39,14 @@ def thread(request, thread_n, board_l):
     current_thread = Thread.objects.get(pk=thread_n)
     current_thread_files = FileThread.objects.filter(thread=current_thread)
     posts = Post.objects.filter(thread_id=thread_n)
-    filess = FilePost.objects.filter(post__thread_id=thread_n)
+    files = FilePost.objects.filter(post__thread_id=thread_n)
     if request.POST:
         form = PostForm(request.POST)
         form_file = PostFileForm()
-        files = request.FILES.getlist('file')
         if form.is_valid():
             post_instance = form.save(commit=False)
             post_instance.save()
-            for file in files:
+            for file in request.FILES.getlist('file'):
                 file_instance = FilePost(file=file, post=post_instance)
                 file_instance.save()
     else:
@@ -61,7 +60,7 @@ def thread(request, thread_n, board_l):
         'form_file': form_file,
         'posts': posts,
         'boards': boardlist,
-        'files': filess,
+        'files': files,
         'current_thread_files': current_thread_files,
     }
     return render(request, 'imageboard/thread.html', context=context)
