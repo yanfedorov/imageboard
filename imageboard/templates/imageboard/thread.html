@@ -66,13 +66,7 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-            <span class="content">
-                            {% if post.reply %}
-                                {% for r in reply %}
-                                    {{ r }}
-                                {% endfor %}
-                            {% endif %}
-            {{ post.content.rendered }}</span>
+            <span class="content">{{ post.content.rendered }}</span>
         </div>
     {% endfor %}
 

@@ -2,7 +2,6 @@ from django.core.validators import FileExtensionValidator
 from django.core.files.images import get_image_dimensions
 from precise_bbcode.fields import BBCodeTextField
 from django.db import models
-import io
 import os
 
 
@@ -42,7 +41,14 @@ class Post(God):
     op_mark = models.BooleanField(verbose_name='ОП треда', default=False)
 
     def reply(self):
-        pass
+        replies = []
+        for line in str(self.content).splitlines():
+            if line.startswith('>>'):
+                replies += line
+        if not replies:
+            return False
+        else:
+            return ''.join(replies).split('>>')
 
     # TODO: MAKE REPLIES
 
