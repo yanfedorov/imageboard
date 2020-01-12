@@ -3,7 +3,7 @@ Django Imageboard
 About
 -----
 My first Django project.
-------------------------
+
 Requirements
 ------------
 1.  [Django 3.0.2](https://github.com/django/django)
