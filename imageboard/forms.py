@@ -14,7 +14,7 @@ class ThreadForm(ModelForm):
                                                          'rows': 1, }), max_length=50, initial='Аноним')
     content = CharField(label=False,
                         widget=Textarea(attrs={'rows': 10,
-                                               'placeholder': 'Содержимое. Макс. длина 15000',
+                                               'placeholder': 'Содержимое. Макс. длина 15000', 'id': 'newpost',
                                                'class': 'newthread'}), max_length=15000)
 
     class Meta:

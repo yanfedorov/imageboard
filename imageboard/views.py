@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import Post, Thread, Board, FilePost, FileThread
 from .forms import PostForm, ThreadForm, PostFileForm, ThreadFileForm
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializer import ThreadSerializer
 
 
 def mainpage(request):
@@ -14,7 +17,7 @@ def board(request, board_l):
     threads = Thread.objects.filter(board__letter=board_l)
     current_board = Board.objects.get(letter=board_l)
     files = FileThread.objects.all()
-    if request.POST:
+    if request.method == 'POST':
         form = ThreadForm(request.POST)
         form_file = ThreadFileForm()
         files = request.FILES.getlist('file')
@@ -40,7 +43,7 @@ def thread(request, thread_n, board_l):
     current_thread_files = FileThread.objects.filter(thread=current_thread)
     posts = Post.objects.filter(thread_id=thread_n)
     files = FilePost.objects.filter(post__thread_id=thread_n)
-    if request.POST:
+    if request.method == 'POST':
         form = PostForm(request.POST)
         form_file = PostFileForm()
         if form.is_valid():
@@ -64,3 +67,11 @@ def thread(request, thread_n, board_l):
         'current_thread_files': current_thread_files,
     }
     return render(request, 'imageboard/thread.html', context=context)
+
+
+@api_view(['GET'])
+def api_thread(request):
+    if request.method == 'GET':
+        threads = Thread.objects.all()
+        serializer = ThreadSerializer(threads, many=True)
+        return Response(serializer.data)

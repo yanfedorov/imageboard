@@ -44,7 +44,7 @@
 
         <div class="post">
                 <p class="namedate">{{ post.name }} {{ post.date|date:'d/m/y H:i:s' }}
-                    <span style="color: #ccc"><a style="color: white; text-decoration-line: none" href="#{{ post.pk }}"> №</a><a name="{{ post.pk }}"></a>{{ post.pk }}
+                    <span style="color: #ccc"><a style="color: white; text-decoration-line: none" href="#{{ post.pk }}"> №</a><a name="{{ post.pk }}"></a><a class="header" style="cursor: pointer;" onclick="insertText('newpost', {{ post.pk }});">{{ post.pk }}</a>
                     </span>
                     {% if post.sage %}<span class="sage">SAGE</span>{% endif %}</p>
                 {% for file in files %}
@@ -79,5 +79,12 @@
 </form>
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{% static 'imageboard/scripts/lightbox.js' %}"></script>
+    <script type="text/javascript">
+      function insertText(elemID, text)
+      {
+        var elem = document.getElementById(elemID);
+        elem.innerHTML += '>>' + text + '\n';
+      }
+    </script>
     <a name="bottom"></a>
 {% endblock content %}
