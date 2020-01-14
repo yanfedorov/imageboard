@@ -1,6 +1,6 @@
 Django Imageboard
 =================
-Мой первый проект с использование Django Framework.
+Мой первый проект с использованием Django Framework.
 
 
 ------------
@@ -28,7 +28,7 @@ Django Imageboard
     pip install django-simple-captcha
     pip install django-cleanup
 
-Установка sorl-thumbnail производится с GitHub, так как на pypi.org лежит версия без поддержки Django 3.x.
+Установка sorl-thumbnail производится с GitHub, так как на pypi.org лежит версия 12.5.0 без поддержки Django 3.x.
 
     git clone https://github.com/jazzband/sorl-thumbnail.git
     cd sorl-thumbnail
@@ -46,7 +46,7 @@ Django Imageboard
   на
   
     from six import python_2_unicode_compatible
-в файлах models.py и fields.py в директории imageboard/lib/python3.x/site-packages/precise_bbcode
+в файлах models.py и fields.py в директории виртуального окружения imageboard/lib/python3.x/site-packages/precise_bbcode
 
 и файле bbcode_tags.py директории imageboard/lib/python3.x/site-packages/precise_bbcode/tampletags
 
