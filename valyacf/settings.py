@@ -9,8 +9,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    'rest_framework',
-    'corsheaders',
     'django_cleanup',
     'precise_bbcode',
     'sorl.thumbnail',
@@ -88,7 +86,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -97,3 +97,5 @@ MEDIA_URL = '/media/'
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_URLS_REGEX = r'^/api/.*$'
+
+SECURE_BROWSER_XSS_FILTER = True
