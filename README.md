@@ -40,6 +40,7 @@ Django Imageboard
     git clone https://github.com/yanfedorov/imageboard.git
     
 Далее необходимо исправить код, не оптимизированный под Django 3.x.
+
 Для этого необходимо исправить строчку
 
     from django.utils.encoding import python_2_unicode_compatible
