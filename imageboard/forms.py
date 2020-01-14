@@ -1,7 +1,6 @@
 from django.forms import ModelForm, Textarea, CharField, FileField, ClearableFileInput
 from django.forms.widgets import HiddenInput
 from .models import Thread, Post, FilePost, FileThread
-# from captcha.fields import CaptchaField
 
 
 # from captcha.fields import CaptchaField
