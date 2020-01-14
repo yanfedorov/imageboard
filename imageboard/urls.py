@@ -3,13 +3,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.views import serve
 from django.views.decorators.cache import never_cache
-from .views import mainpage, board, thread, api_thread
+from .views import mainpage, board, thread
 
 urlpatterns = [
     path('<str:board_l>/', board, name='board'),
     path('<str:board_l>/<int:thread_n>/', thread, name='thread'),
     path('', mainpage, name='mainpage'),
-    path('api/threads/', api_thread),
     path('static/<path:path>', never_cache(serve)),  # DELETE THIS IF setting.DEBUG == True
 ]
 if settings.DEBUG:
