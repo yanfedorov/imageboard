@@ -44,7 +44,7 @@ Django Imageboard
     from six import python_2_unicode_compatible
 в файлах models.py и fields.py в директории виртуального окружения imageboard/lib/python3.x/site-packages/precise_bbcode
 
-и файле bbcode_tags.py директории imageboard/lib/python3.x/site-packages/precise_bbcode/tampletags
+и файле bbcode_tags.py директории imageboard/lib/python3.x/site-packages/precise_bbcode/tampletags меняем строчку
 
     from django.utils import six
 на
