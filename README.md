@@ -20,21 +20,20 @@ Django Imageboard
 Активируем виртуальное окружение Python
 
     source bin/activate
+Скачиваем данный проект 
+
+    git clone https://github.com/yanfedorov/imageboard.git
+    cd imageboard
 Установка Django и дополнительных библиотек в виртуальное окружение
 
-    pip install django
-    pip install django-precise-bbcode
-    pip install django-simple-captcha
-    pip install django-cleanup
+    pip install -r requirements.txt
 Установка sorl-thumbnail производится с GitHub, так как на pypi.org лежит версия 12.5.0 без поддержки Django 3.x.
 
     git clone https://github.com/jazzband/sorl-thumbnail.git
     cd sorl-thumbnail
     python setup.py install
     cd ..
-Скачиваем данный проект
 
-    git clone https://github.com/yanfedorov/imageboard.git
 Далее необходимо исправить код, не оптимизированный под Django 3.x.
 
 Для этого необходимо исправить строчку
@@ -53,7 +52,6 @@ Django Imageboard
     import six
 Запускаем сервер
 
-    cd imageboard
     python manage.py runserver
     
 
