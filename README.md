@@ -33,23 +33,6 @@ Django Imageboard
     cd sorl-thumbnail
     python setup.py install
     cd ..
-
-Далее необходимо исправить код, не оптимизированный под Django 3.x.
-
-Для этого необходимо исправить строчку
-
-    from django.utils.encoding import python_2_unicode_compatible
-  на
-  
-    from six import python_2_unicode_compatible
-в файлах models.py и fields.py в директории виртуального окружения imageboard/lib/python3.x/site-packages/precise_bbcode
-
-и файле bbcode_tags.py директории imageboard/lib/python3.x/site-packages/precise_bbcode/tampletags меняем строчку
-
-    from django.utils import six
-на
-
-    import six
 Запускаем сервер
 
     python manage.py runserver
