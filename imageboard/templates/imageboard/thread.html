@@ -4,87 +4,86 @@
 
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'imageboard/lightbox.css'%}"/>
+<link rel="stylesheet" href="{% static 'imageboard/lightbox.css'%}" />
 {% endblock head %}
 
 {% block title %}{{ current_board.name }}{% endblock title %}
 
 {% block content %}
-    <a class="links" href="{% url 'mainpage' %}">Главная</a>
-    {% for board in boards %}
-        <a class='links' href="{% url 'board' board.letter %}">{{ board.name }}</a>
-    {% endfor %}
-    </br>
-    <a style="color: white" class="links" href="#bottom">Вниз</a>
+<a class="links" href="{% url 'mainpage' %}">Главная</a>
+{% for board in boards %}
+<a class='links' href="{% url 'board' board.letter %}">{{ board.name }}</a>
+{% endfor %}
+</br>
+<a style="color: white" class="links" href="#bottom">Вниз</a>
 
 <header><a class="header" href="{% url 'board' current_board.letter %}">{{ current_board.name }}</a>.</header>
 <div class="post">
-<p class="thread_title">{{ current_thread.title }}</p>
-    <p class="namedate">{{ current_thread.name }} {{ current_thread.date|date:'d/m/y H:i:s' }}
-        <span style="color: #ccc">№{{ current_thread.pk }}</span></p>
-    {% for file in current_thread_files %}
-        <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" target="_blank">{{ file.file }}</a>
-                    <p class="img_size">({{ file.file.size|filesizeformat }}{% if file.extension == '.jpeg' or file.extension == '.png' or file.extension == '.jpg'%}, {{ file.resolution }})</p>
-                        <form enctype="multipart/form-data">
-                        <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" data-lightbox="none" target="_blank">
-                                {% thumbnail file.file '200' crop='center' as img %}
-                                    <img src="{{MEDIA_URL }}{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
-                                {% endthumbnail %}
-                        </a>
-                        </form>
-                    {% else %})</p>
-                        <video controls width="170" height="95">
-                            <source src="{{ MEDIA_URL }}{{ file.file.url }}">
-                        </video>
-                    {% endif %}
-                    {% endfor %}
-                        <span class="content">{{ current_thread.content.rendered }}</span>
-    </div>
-    {% for post in posts %}
+  <p class="thread_title">{{ current_thread.title }}</p>
+  <p class="namedate">{{ current_thread.name }} {{ current_thread.date|date:'d/m/y H:i:s' }}
+    <span style="color: #ccc">№{{ current_thread.pk }}</span></p>
+  {% for file in current_thread_files %}
+  <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" target="_blank">{{ file.file }}</a>
+  <p class="img_size">({{ file.file.size|filesizeformat }}{% if file.extension == '.jpeg' or file.extension == '.png' or file.extension == '.jpg'%}, {{ file.resolution }})</p>
+  <form enctype="multipart/form-data">
+    <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" data-lightbox="none" target="_blank">
+      {% thumbnail file.file '200' crop='center' as img %}
+      <img src="{{MEDIA_URL }}{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
+      {% endthumbnail %}
+    </a>
+  </form>
+  {% else %})</p>
+  <video controls width="170" height="95">
+    <source src="{{ MEDIA_URL }}{{ file.file.url }}">
+  </video>
+  {% endif %}
+  {% endfor %}
+  <span class="content">{{ current_thread.content.rendered }}</span>
+</div>
+{% for post in posts %}
 
-        <div class="post">
-                <p class="namedate">{{ post.name }} {{ post.date|date:'d/m/y H:i:s' }}
-                    <span style="color: #ccc"><a style="color: white; text-decoration-line: none" href="#{{ post.pk }}"> №</a><a name="{{ post.pk }}"></a><a class="header" style="cursor: pointer;" onclick="insertText('newpost', {{ post.pk }});">{{ post.pk }}</a>
-                    </span>
-                    {% if post.sage %}<span class="sage">SAGE</span>{% endif %}</p>
-                {% for file in files %}
-                    {% if post.id == file.post.id %}
-                        <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" target="_blank">{{ file.file }}</a>
-                        <p class="img_size">({{ file.file.size|filesizeformat }}{% if file.extension == '.jpeg' or file.extension == '.png' or file.extension == '.jpg'%},
-                            {{ file.resolution }})</p>
-                            <form enctype="multipart/form-data">
-                            <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" data-lightbox="none" target="_blank">
-                                    {% thumbnail file.file '200' crop='center' as img %}
-                                    <img src="{{ MEDIA_URL }}{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
-                                    {% endthumbnail %}
-                            </a>
-                            </form>
-                        {% else %})</p>
-                            <video controls width="170" height="95">
-                                <source src="{{ MEDIA_URL }}{{ file.file.url }}">
-                            </video>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-            <span class="content">{{ post.content.rendered }}</span>
-        </div>
-    {% endfor %}
+<div class="post">
+  <p class="namedate">{{ post.name }} {{ post.date|date:'d/m/y H:i:s' }}
+    <span style="color: #ccc"><a style="color: white; text-decoration-line: none" href="#{{ post.pk }}"> №</a><a name="{{ post.pk }}"></a><a class="header" style="cursor: pointer;" onclick="insertText('newpost', {{ post.pk }});">{{ post.pk }}</a>
+    </span>
+    {% if post.sage %}<span class="sage">SAGE</span>{% endif %}</p>
+  {% for file in files %}
+  {% if post.id == file.post.id %}
+  <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" target="_blank">{{ file.file }}</a>
+  <p class="img_size">({{ file.file.size|filesizeformat }}{% if file.extension == '.jpeg' or file.extension == '.png' or file.extension == '.jpg'%},
+    {{ file.resolution }})</p>
+  <form enctype="multipart/form-data">
+    <a class="image" href="{{ MEDIA_URL }}{{ file.file.url }}" data-lightbox="none" target="_blank">
+      {% thumbnail file.file '200' crop='center' as img %}
+      <img src="{{ MEDIA_URL }}{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}">
+      {% endthumbnail %}
+    </a>
+  </form>
+  {% else %})</p>
+  <video controls width="170" height="95">
+    <source src="{{ MEDIA_URL }}{{ file.file.url }}">
+  </video>
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+  <span class="content">{{ post.content.rendered }}</span>
+</div>
+{% endfor %}
 
 <form class="newthread" method="post" enctype="multipart/form-data" novalidate style="margin-left: 150px">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {{ form_file.as_p }}
-    <button class="post" type="submit">Запостить</button>
-    <a class="links" href="#top">Вверх</a>
+  {% csrf_token %}
+  {{ form.as_p }}
+  {{ form_file.as_p }}
+  <button class="post" type="submit">Запостить</button>
+  <a class="links" href="#top">Вверх</a>
 </form>
-    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="{% static 'imageboard/scripts/lightbox.js' %}"></script>
-    <script type="text/javascript">
-      function insertText(elemID, text)
-      {
-        var elem = document.getElementById(elemID);
-        elem.innerHTML += '>>' + text + '\n';
-      }
-    </script>
-    <a name="bottom"></a>
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="{% static 'imageboard/scripts/lightbox.js' %}"></script>
+<script type="text/javascript">
+  function insertText(elemID, text) {
+    var elem = document.getElementById(elemID);
+    elem.innerHTML += '>>' + text + '\n';
+  }
+</script>
+<a name="bottom"></a>
 {% endblock content %}

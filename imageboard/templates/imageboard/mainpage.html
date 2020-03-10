@@ -1,12 +1,12 @@
 {% extends 'imageboard/layout/basic.html' %}
 {% block content %}
-    <header>Главная.</header>
-    <div class="boardlist">
-        {% for board in boards %}
-            <a class="boardlist" href="{% url 'board' board.letter %}">{{ board.name }}</a>
-        {% endfor %}
-        <a class="boardlist" href="admin">Админка</a>
-    </div>
-    {% block post %}
-        {% endblock post %}
+<header>Главная.</header>
+<div class="boardlist">
+  {% for board in boards %}
+  <a class="boardlist" href="{% url 'board' board.letter %}">{{ board.name }}</a>
+  {% endfor %}
+  <a class="boardlist" href="admin">Админка</a>
+</div>
+{% block post %}
+{% endblock post %}
 {% endblock content %}
