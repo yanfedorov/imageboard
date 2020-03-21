@@ -1,6 +1,6 @@
 Django Imageboard
 =================
-Мой первый проект с использованием Django Framework.
+Мой проект с использованием Django Framework.
 
 ------------
 1.  [Django](https://github.com/django/django)
